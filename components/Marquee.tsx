@@ -8,27 +8,41 @@ import { useEffect, useRef } from "react";
  * page scrolls. Koodby light theme. Images live in /public.
  */
 const shots = [
-  { src: "/work-omar.png", alt: "Omar Hassan — filmmaker portfolio" },
-  { src: "/work-gabax.png", alt: "Gabax — logistics & shipping platform" },
-  { src: "/work-khalif.png", alt: "Khalif Rooble — consultant portfolio" },
-  { src: "/tarzan.png", alt: "Tarzan — software engineering portfolio" },
+  { src: "/work-omar.png", alt: "Omar Hassan — filmmaker portfolio", link: "https://omarhassan.com" },
+  { src: "/work-gabax.png", alt: "Gabax — logistics & shipping platform", link: "https://gabax.so" },
+  { src: "/zonetech-landing.png", alt: "ZoneTech — tech e-commerce landing", link: "https://zonetech.com" },
+  { src: "/suitle-concert.png", alt: "Svitlo Concert — event landing page", link: "https://svitloconcert.com" },
+  { src: "/tarzan.png", alt: "Tarzan — software engineering portfolio", link: "https://tarzan.dev" },
+  { src: "/Sound-Experience.png", alt: "IRCAM Amplify — sound experience", link: "https://ircamamplify.com" },
+  { src: "/norde.png", alt: "Norde — digital product design", link: "https://norde.design" },
 ];
 
 // Tripled for a seamless loop.
 const rowA = [...shots, ...shots, ...shots];
 const rowB = [...[...shots].reverse(), ...[...shots].reverse(), ...[...shots].reverse()];
 
-function Tile({ src, alt }: { src: string; alt: string }) {
+function Tile({ src, alt, link }: { src: string; alt: string; link: string }) {
   return (
-    <div className="relative h-[168px] w-[260px] shrink-0 overflow-hidden rounded-2xl border bg-surface shadow-sm sm:h-[210px] sm:w-[330px] md:h-[270px] md:w-[420px]">
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative h-[168px] w-[260px] shrink-0 overflow-hidden rounded-2xl border bg-surface shadow-sm sm:h-[210px] sm:w-[330px] md:h-[270px] md:w-[420px] cursor-pointer"
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
         alt={alt}
         loading="lazy"
-        className="h-full w-full object-cover object-top"
+        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
       />
-    </div>
+      {/* Hover overlay */}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+        <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full">
+          View project →
+        </span>
+      </div>
+    </a>
   );
 }
 

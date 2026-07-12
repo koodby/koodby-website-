@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   title: "Koodby — Somali technology studio",
   description:
     "Koodby is a Somali technology studio building AI models, apps, and digital solutions — where Somali builders connect.",
+  icons: {
+    icon: "/icon.png",
+  },
   keywords: [
     "Koodby",
     "Somali tech studio",

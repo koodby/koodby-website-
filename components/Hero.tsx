@@ -105,15 +105,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Hero Ampersand Graphic — hidden on mobile where it would sit on top of the headline */}
-          <div className="hidden md:block absolute top-[5%] right-[10%] w-32 h-32 md:w-64 md:h-64 pointer-events-none z-0 mix-blend-multiply rounded-full overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src="/hero-ampersand.png" 
-              alt="Ampersand" 
-              className="w-full h-full object-cover scale-110"
-            />
-          </div>
+
 
           <h1 className="text-[11vw] md:text-[130px] lg:text-[150px] leading-[0.85] font-black tracking-tighter text-black uppercase relative z-10">
             DIGITAL<br />

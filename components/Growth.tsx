@@ -31,15 +31,15 @@ function AnimatedText() {
   let wordCount = 0;
 
   return (
-    <h2 
-      ref={container} 
-      className="text-[26px] sm:text-[32px] lg:text-[42px] font-display font-light leading-[1.25] tracking-tight mx-auto text-center"
+    <h2
+      ref={container}
+      className="text-[22px] sm:text-[28px] lg:text-[40px] font-display font-light leading-[1.25] tracking-tight mx-auto text-center"
     >
       {words.map((word, i) => {
         if (word === "<br>") {
           return <br key={i} className="hidden sm:block" />;
         }
-        
+
         const start = wordCount / totalWords;
         const end = start + (1 / totalWords);
         wordCount++;
@@ -58,7 +58,7 @@ export function Growth() {
   return (
     <section className="relative w-full overflow-hidden bg-transparent py-32 sm:py-48 flex items-center justify-center min-h-[80vh]">
       <div className="container-koodby relative z-10 mx-auto max-w-5xl text-center flex flex-col items-center">
-        
+
         <FadeIn delay={0.1}>
           <div className="flex items-center justify-center gap-4 mb-8">
             <div className="h-[1px] w-12 bg-muted/30" />
@@ -72,7 +72,7 @@ export function Growth() {
 
       {/* Floating Pills - Hidden on small screens, visible on large screens */}
       {/* Design Systems - Orange */}
-      <motion.div 
+      <motion.div
         className="hidden lg:flex absolute top-[36%] left-[2%] xl:left-[6%] items-center gap-6 bg-white pl-2 pr-8 py-2 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-white"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -85,7 +85,7 @@ export function Growth() {
       </motion.div>
 
       {/* UX Design - Dark Green */}
-      <motion.div 
+      <motion.div
         className="hidden lg:flex absolute top-[48%] left-[6%] xl:left-[12%] items-center gap-6 bg-white pl-2 pr-8 py-2 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-white"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -98,7 +98,7 @@ export function Growth() {
       </motion.div>
 
       {/* Research - Blue */}
-      <motion.div 
+      <motion.div
         className="hidden lg:flex absolute top-[60%] left-[3%] xl:left-[8%] items-center gap-6 bg-white pl-2 pr-8 py-2 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-white"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -111,7 +111,7 @@ export function Growth() {
       </motion.div>
 
       {/* Animation - Light Green */}
-      <motion.div 
+      <motion.div
         className="hidden lg:flex absolute top-[36%] right-[6%] xl:right-[12%] items-center gap-6 bg-white pl-2 pr-8 py-2 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-white"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -124,7 +124,7 @@ export function Growth() {
       </motion.div>
 
       {/* Branding - Pink */}
-      <motion.div 
+      <motion.div
         className="hidden lg:flex absolute top-[48%] right-[4%] xl:right-[8%] items-center gap-6 bg-white pl-2 pr-8 py-2 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-white"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -137,7 +137,7 @@ export function Growth() {
       </motion.div>
 
       {/* Strategy - Yellow */}
-      <motion.div 
+      <motion.div
         className="hidden lg:flex absolute top-[60%] right-[7%] xl:right-[14%] items-center gap-6 bg-white pl-2 pr-8 py-2 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-white"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

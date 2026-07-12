@@ -193,7 +193,7 @@ function ServiceCard({
     <div className="sticky top-0 flex h-screen items-center justify-center px-4">
       <motion.div
         style={{ scale, top: `calc(-6vh + ${index * 26}px)` }}
-        className={`relative flex h-[75vh] w-full max-w-6xl flex-col lg:flex-row overflow-hidden rounded-[32px] border border-hairline p-6 shadow-sm sm:p-10 gap-8 lg:gap-12 ${service.cardBg || "bg-surface"}`}
+        className={`relative flex h-[82vh] lg:h-[75vh] w-full max-w-6xl flex-col lg:flex-row overflow-hidden rounded-[32px] border border-hairline p-6 shadow-sm sm:p-10 gap-6 lg:gap-12 ${service.cardBg || "bg-surface"}`}
       >
         {/* Left Side (Text & Details) */}
         <div className="flex flex-col lg:w-5/12 h-full justify-center">
@@ -217,9 +217,9 @@ function ServiceCard({
             </p>
             
             {/* Detailed Sub-services list */}
-            <div className="mt-8">
-              <h4 className={`text-[14px] font-medium uppercase tracking-wider mb-4 ${service.textColor || "text-ink"}`}>What we do</h4>
-              <ul className="space-y-3">
+            <div className="mt-6 sm:mt-8">
+              <h4 className={`text-[14px] font-medium uppercase tracking-wider mb-3 sm:mb-4 ${service.textColor || "text-ink"}`}>What we do</h4>
+              <ul className="space-y-2 sm:space-y-3">
                 {service.features.map((feat) => (
                   <li key={feat} className={`flex items-center gap-3 text-[16px] ${service.mutedColor || "text-muted"}`}>
                     <div className={`h-1.5 w-1.5 shrink-0 rounded-full ${service.dotClass || "bg-ink/40"}`} />
@@ -232,7 +232,7 @@ function ServiceCard({
         </div>
 
         {/* Right Side (craft visual) */}
-        <div className={`mt-6 lg:mt-0 flex-1 overflow-hidden rounded-[24px] border border-hairline relative h-full min-h-[300px] flex items-center justify-center ${service.bgGradient || "bg-off-white"}`}>
+        <div className={`flex-1 overflow-hidden rounded-[24px] border border-hairline relative h-full min-h-[200px] sm:min-h-[250px] lg:min-h-[300px] flex items-center justify-center ${service.bgGradient || "bg-off-white"}`}>
           {service.visual}
         </div>
       </motion.div>
