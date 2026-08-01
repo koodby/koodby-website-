@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { LogOut, Trash2, Plus, Loader2 } from "lucide-react";
@@ -42,7 +42,7 @@ const emptyForm = {
 
 export default function AdminResearchPage() {
   const router = useRouter();
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
   const [posts, setPosts] = useState<ResearchRow[]>([]);
   const [loadingList, setLoadingList] = useState(true);
