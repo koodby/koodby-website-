@@ -7,8 +7,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { Preloader } from "@/components/Preloader";
 import "./globals.css";
 
-// Set the theme class before first paint to avoid a flash of the wrong theme.
-const themeScript = `(function(){try{var t=localStorage.getItem('koodby-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`;
+// Set the theme class before first paint to avoid a flash of the wrong theme. Default to Day mode.
+const themeScript = `(function(){try{var t=localStorage.getItem('koodby-theme');if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`;
 
 // Display / headings — elegant serif.
 const playfair = Playfair_Display({
@@ -33,8 +33,9 @@ export const metadata: Metadata = {
   description:
     "Koodby is Somalia's leading technology studio building AI models, Somali language AI, web applications, mobile apps, and digital products. We specialize in Somali AI, machine learning, and custom software development. Built in Mogadishu, made for the world.",
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/narbar-logo.png",
+    shortcut: "/narbar-logo.png",
+    apple: "/narbar-logo.png",
   },
   keywords: [
     // Brand
