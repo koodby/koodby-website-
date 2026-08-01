@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 
 import { getResearchSlugs } from "@/lib/research-queries";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Dynamic sitemap generator — Next.js produces `/sitemap.xml` from this at
  * build-time (static) and on each request (dynamic). Google, Bing, and other
