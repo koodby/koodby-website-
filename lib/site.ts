@@ -8,15 +8,14 @@
 export const site = {
   email: "hello@koodby.com",
   emailDirect: "tarzan@koodby.com",
-  // Placeholder — 252 is Somalia's country code. Replace the subscriber digits.
-  whatsappNumber: "252618450410",
+  whatsappNumber: "",
   whatsappGreeting: "Hello Koodby, I would like to discuss a project.",
   github: "https://github.com/koodby",
   linkedin: "https://www.linkedin.com/company/koodby",
 } as const;
 
-export const whatsappLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(
-  site.whatsappGreeting
-)}`;
-
 export const mailtoLink = `mailto:${site.email}`;
+
+export const whatsappLink = site.whatsappNumber
+  ? `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(site.whatsappGreeting)}`
+  : mailtoLink;

@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     q: "How do we communicate during the project?",
-    a: `One point of contact, on WhatsApp or email — whichever you prefer. Weekly demo links, and you can reach us at ${site.email} any time.`,
+    a: `One point of contact via email. Weekly demo links, and you can reach us at ${site.email} any time.`,
   },
 ];
 

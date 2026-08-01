@@ -100,7 +100,7 @@ export function HeroDemo() {
               <span className="inline-flex items-center gap-2">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-[9px] border border-white/70 bg-white/70">
                   <img
-                    src="/koodby-logo.png"
+                    src="/narbar-logo.png"
                     alt=""
                     className="h-5 w-5 object-contain"
                   />
@@ -155,7 +155,7 @@ export function HeroDemo() {
                   <Bell size={15} strokeWidth={1.75} aria-hidden="true" />
                 </span>
                 <img
-                  src="/somali_dev_1.png"
+                  src="/tarzan_founder.png"
                   alt="Team member"
                   className="h-8 w-8 rounded-full border border-white/70 object-cover"
                 />

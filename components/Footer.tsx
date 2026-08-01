@@ -45,13 +45,12 @@ const sitemap = [
 const elsewhere = [
   { label: "GitHub", href: site.github, icon: Github },
   { label: "LinkedIn", href: site.linkedin, icon: Linkedin },
-  { label: "WhatsApp", href: whatsappLink, icon: MessageCircle },
   { label: "Email", href: mailtoLink, icon: Mail },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t bg-transparent">
+    <footer className="border-t bg-transparent" aria-label="Koodby — Somali AI and technology studio footer">
       <div className="container-koodby pt-16 sm:pt-20">
         {/* top row: invitation + columns */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
@@ -123,7 +122,7 @@ export function Footer() {
       {/* bottom bar */}
       <div className="border-t">
         <div className="container-koodby flex flex-col items-center gap-4 py-6 text-[14px] sm:flex-row sm:justify-between">
-          <span className="text-muted">© 2026 Koodby — Built in Somalia. Made for the world.</span>
+          <span className="text-muted">© 2026 Koodby — Somali AI & technology studio. Built in Mogadishu, Somalia. Made for the world.</span>
           <MogadishuClock />
           <Magnet padding={70} strength={5}>
             <a

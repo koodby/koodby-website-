@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Renders children at a fixed design width and scales them down with CSS
@@ -19,7 +19,7 @@ export function ScaledDashboard({
   const [scale, setScale] = useState(1);
   const [height, setHeight] = useState<number | undefined>(undefined);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const outer = outerRef.current;
     const inner = innerRef.current;
     if (!outer || !inner) return;

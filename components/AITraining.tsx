@@ -24,8 +24,8 @@ import { FadeIn } from "./anim/FadeIn";
 /* Content                                                             */
 /* ------------------------------------------------------------------ */
 
-const INPUT_TEXT = "Waxaan u baahanahay in la ii dhiso website iyo app casri ah.";
-const OUTPUT_TEXT = "Dabcan! Koodby waxay kuu dhisaysaa nidaam dhamaystiran oo tayadiisu sarreyso.";
+const INPUT_TEXT = "I need a modern website and mobile app built.";
+const OUTPUT_TEXT = "Absolutely! Koodby will build you a complete, high-quality system.";
 
 /* ------------------------------------------------------------------ */
 /* Palette (SVG needs raw hex; these mirror the locked tokens)         */
@@ -457,19 +457,15 @@ export function AITraining() {
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <FadeIn>
-            <span className="font-sans text-[13px] font-bold uppercase tracking-widest text-ink/50">
-              AI Training
-            </span>
-          </FadeIn>
-          <FadeIn>
             <h2 className="mt-4 text-[40px] font-sans font-black uppercase leading-[1.05] tracking-tighter text-ink sm:text-[56px]">
-              AI Training
+              CUSTOM AI SOLUTIONS
             </h2>
           </FadeIn>
           <FadeIn>
             <p className="mx-auto mt-6 max-w-xl text-[18px] leading-relaxed text-ink/70">
-              Daawo sida moodalka Koodby u qaato su&apos;aal, uga fikiro
-              shabakad neurons ah, kolkaana afka Soomaaliga kuugu jawaabo.
+              We bring the power of Artificial Intelligence to East African businesses. 
+              We train custom AI models tailored to your specific workflows and seamlessly 
+              integrate them into custom web and mobile apps to accelerate your growth.
             </p>
           </FadeIn>
         </div>

@@ -1,19 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-import { Logo } from "./Logo";
+import { useEffect, useState, type ReactNode } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 const links = [
-  { href: "/#work", label: "Work" },
-  { href: "/#services", label: "Services" },
-  { href: "/#about-us", label: "About us" },
-  { href: "/research", label: "Research" },
-  { href: "/community", label: "Community" },
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "Work" },
+  { href: "#about", label: "About" },
+  { href: "/researches", label: "Insights" },
+  { href: "#contact", label: "Contact" },
 ];
 
-export function Nav() {
-  const [open, setOpen] = useState(false);
+export function Nav({ logo }: { logo?: ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -25,77 +23,58 @@ export function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-40 bg-white/85 backdrop-blur-sm transition-colors ${
-        scrolled ? "border-b" : "border-b border-transparent"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 dark:bg-[#0a0a0c]/80 backdrop-blur-md border-b border-hairline/50 dark:border-white/10 shadow-sm"
+          : "bg-transparent border-transparent"
       }`}
     >
       <nav
         aria-label="Main navigation"
-        className="mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12 flex h-[68px] items-center justify-between"
+        className="mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-12 flex h-[72px] items-center justify-between"
       >
-        <a href="/" className="rounded-btn" aria-label="Koodby — Home">
-          <Logo />
-        </a>
+        {/* Left side: Logo */}
+        <div className="flex-1 flex justify-start">
+          <a href="/" className="flex items-center" aria-label="Koodby — Home">
+            {logo ?? (
+              <div className="bg-white/40 dark:bg-white/10 backdrop-blur-md border border-white/50 dark:border-white/20 text-ink px-5 py-2 rounded-full flex items-center justify-center shadow-sm">
+                <span className="text-[24px] font-black tracking-tight leading-none pt-0.5 -translate-x-1">koodby</span>
+              </div>
+            )}
+          </a>
+        </div>
 
-        {/* desktop links */}
-        <div className="hidden items-center gap-8 md:flex">
+        {/* Center: Navigation Links */}
+        <div className="hidden lg:flex flex-1 justify-center">
           <ul className="flex items-center gap-8">
             {links.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="text-[16px] text-muted transition-colors hover:text-ink"
+                  className="group relative flex overflow-hidden text-[14px] font-medium text-ink"
                 >
-                  {l.label}
+                  <span className="transition-transform duration-0 group-hover:duration-500 ease-out group-hover:-translate-y-full">{l.label}</span>
+                  <span className="absolute inset-0 transition-transform duration-0 group-hover:duration-500 ease-out translate-y-full group-hover:translate-y-0">{l.label}</span>
                 </a>
               </li>
             ))}
           </ul>
-          <a href="/#contact-us" className="btn-primary !py-2.5 !px-5 text-sm">
-            Contact us
+        </div>
+
+        {/* Right side: CTAs */}
+        <div className="flex-1 flex justify-end items-center gap-4">
+          <a
+            href="/links"
+            className="group inline-flex items-center gap-4 rounded-xl bg-[#1c1c1c] p-1.5 pl-5 border border-white/10 transition-transform hover:scale-[1.02] shadow-sm"
+          >
+            <span className="text-[14.5px] font-medium text-white">See our links</span>
+            <div className="relative flex h-[34px] w-[42px] items-center justify-center overflow-hidden rounded-lg bg-[#2563EB] transition-colors group-hover:bg-[#1D4ED8]">
+              <ArrowUpRight size={18} strokeWidth={2.5} className="text-white transition-transform duration-0 group-hover:duration-500 ease-out group-hover:translate-x-6 group-hover:-translate-y-6" aria-hidden />
+              <ArrowUpRight size={18} strokeWidth={2.5} className="absolute text-white transition-transform duration-0 group-hover:duration-500 ease-out -translate-x-6 translate-y-6 group-hover:translate-x-0 group-hover:translate-y-0" aria-hidden />
+            </div>
           </a>
         </div>
-
-        {/* mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-btn border text-ink md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          {open ? <X size={20} strokeWidth={1.75} /> : <Menu size={20} strokeWidth={1.75} />}
-        </button>
       </nav>
-
-      {/* mobile menu */}
-      {open && (
-        <div id="mobile-menu" className="border-t bg-white md:hidden">
-          <ul className="container-koodby flex flex-col gap-1 py-4">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-btn px-2 py-3 text-base text-ink"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-            <li className="pt-2">
-              <a
-                href="/#contact-us"
-                onClick={() => setOpen(false)}
-                className="btn-primary w-full"
-              >
-                Contact us
-              </a>
-            </li>
-          </ul>
-        </div>
-      )}
     </header>
   );
 }

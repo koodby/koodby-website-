@@ -22,18 +22,18 @@ function AnimatedText() {
   });
 
   const words = [
-    "We", "help", "brands", "grow", "with", "standout", "<br>",
-    "design,", "clear", "branding,", "and", "content", "<br>",
-    "that", "drives", "results."
+    "We", "research", "everyday", "problems", "<br>", 
+    "to", "craft", "intelligent", "AI", "systems", "<br>",
+    "and", "digital", "platforms", "that", "drive", "meaningful", "growth."
   ];
 
-  const totalWords = words.filter(w => w !== "<br>").length;
+  const totalWords = words.length;
   let wordCount = 0;
 
   return (
     <h2
       ref={container}
-      className="text-[22px] sm:text-[28px] lg:text-[40px] font-display font-light leading-[1.25] tracking-tight mx-auto text-center"
+      className="text-[18px] sm:text-[24px] lg:text-[32px] max-w-4xl font-display font-light leading-[1.3] tracking-tight mx-auto text-center normal-case"
     >
       {words.map((word, i) => {
         if (word === "<br>") {
@@ -62,7 +62,7 @@ export function Growth() {
         <FadeIn delay={0.1}>
           <div className="flex items-center justify-center gap-4 mb-8">
             <div className="h-[1px] w-12 bg-muted/30" />
-            <span className="font-display italic text-muted text-[16px]">Hello!</span>
+            <span className="font-display italic text-muted text-[16px]">Our Mission</span>
             <div className="h-[1px] w-12 bg-muted/30" />
           </div>
         </FadeIn>
@@ -78,10 +78,10 @@ export function Growth() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
       >
-        <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#FF6B00]">
+        <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#2563EB]">
           <LayoutGrid size={26} className="text-white" />
         </div>
-        <span className="text-[18px] font-medium text-ink">Design systems</span>
+        <span className="text-[18px] font-medium text-black">Local Research</span>
       </motion.div>
 
       {/* UX Design - Dark Green */}
@@ -94,7 +94,7 @@ export function Growth() {
         <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#2E4A3F]">
           <PenTool size={26} className="text-white" />
         </div>
-        <span className="text-[18px] font-medium text-ink">UX Design</span>
+        <span className="text-[18px] font-medium text-black">AI Systems</span>
       </motion.div>
 
       {/* Research - Blue */}
@@ -107,7 +107,7 @@ export function Growth() {
         <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#0085FF]">
           <Search size={26} className="text-white" />
         </div>
-        <span className="text-[18px] font-medium text-ink">Research</span>
+        <span className="text-[18px] font-medium text-black">Digital Platforms</span>
       </motion.div>
 
       {/* Animation - Light Green */}
@@ -120,7 +120,7 @@ export function Growth() {
         <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#00D97E]">
           <PlayCircle size={26} className="text-white" />
         </div>
-        <span className="text-[18px] font-medium text-ink">Animation</span>
+        <span className="text-[18px] font-medium text-black">Product Strategy</span>
       </motion.div>
 
       {/* Branding - Pink */}
@@ -133,7 +133,7 @@ export function Growth() {
         <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#FF2E93]">
           <Star size={26} className="text-white" />
         </div>
-        <span className="text-[18px] font-medium text-ink">Branding</span>
+        <span className="text-[18px] font-medium text-black">UX / UI Design</span>
       </motion.div>
 
       {/* Strategy - Yellow */}
@@ -146,7 +146,7 @@ export function Growth() {
         <div className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#FFC700]">
           <Target size={26} className="text-white" />
         </div>
-        <span className="text-[18px] font-medium text-ink">Strategy</span>
+        <span className="text-[18px] font-medium text-black">Scalable Solutions</span>
       </motion.div>
 
     </section>

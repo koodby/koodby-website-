@@ -6,9 +6,24 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { site } from "@/lib/site";
 
 export const metadata = {
-  title: "Community — Koodby",
+  title: "Community — Hub for Somali Engineers, Developers & Researchers",
   description:
-    "The Koodby community — a hub for Somali engineers, programmers, and researchers. Coming soon.",
+    "The Koodby community — a hub uniting Somali engineers, programmers, AI researchers, and tech builders. Join the growing Somali technology community. Coming soon.",
+  keywords: [
+    "Somali engineers community",
+    "Somali developers",
+    "Somali programmers",
+    "Somali tech community",
+    "Somali AI researchers",
+    "Somalia developer network",
+    "Somali coders",
+    "East Africa tech community",
+  ],
+  openGraph: {
+    title: "Community — Koodby",
+    description: "Uniting Somali engineers, programmers, and researchers. Profiles, projects, and opportunities.",
+    url: "https://koodby.com/community",
+  },
 };
 
 const waitlistLink = `mailto:${site.email}?subject=${encodeURIComponent(

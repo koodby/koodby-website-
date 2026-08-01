@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import { SmoothScroll } from "@/components/anim/SmoothScroll";
 import { FixedClock } from "@/components/FixedClock";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { JsonLd } from "@/components/JsonLd";
+import { Preloader } from "@/components/Preloader";
 import "./globals.css";
+
+// Set the theme class before first paint to avoid a flash of the wrong theme.
+const themeScript = `(function(){try{var t=localStorage.getItem('koodby-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`;
 
 // Display / headings — elegant serif.
 const playfair = Playfair_Display({
@@ -20,29 +26,118 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://koodby.com"),
-  title: "Koodby — Somali technology studio",
+  title: {
+    default: "Koodby — Somali AI & Technology Studio | Web, Apps & AI Solutions",
+    template: "%s | Koodby",
+  },
   description:
-    "Koodby is a Somali technology studio building AI models, apps, and digital solutions — where Somali builders connect.",
+    "Koodby is Somalia's leading technology studio building AI models, Somali language AI, web applications, mobile apps, and digital products. We specialize in Somali AI, machine learning, and custom software development. Built in Mogadishu, made for the world.",
   icons: {
     icon: "/icon.png",
+    apple: "/icon.png",
   },
   keywords: [
+    // Brand
     "Koodby",
-    "Somali tech studio",
-    "AI models",
-    "app development",
-    "digital solutions",
-    "Somalia",
+    "Koodby tech",
+    "Koodby studio",
+    "Koodby Somalia",
+    // Somali AI — primary targets
+    "Somali AI",
+    "Soomaali AI",
+    "AI Soomaaliyeed",
+    "Somali artificial intelligence",
+    "Somali language AI",
+    "Somali NLP",
+    "Somali language model",
+    "AI af Soomaali",
+    // Somali Technology
+    "Somali technology",
+    "Somali tech",
+    "Somali tech company",
+    "Somalia technology company",
+    "East Africa tech",
+    "African tech startup",
+    "Mogadishu tech",
+    "technology Somalia",
+    "tiknolojiyada Soomaaliya",
+    // Software & Development
+    "Somali software company",
+    "Somali web developer",
+    "Somali website builder",
+    "Somali app development",
+    "Somali mobile app",
+    "Somalia software development",
+    "web development Somalia",
+    "app development Somalia",
+    "React developer Somalia",
+    "Next.js developer Somalia",
+    "full-stack developer Somalia",
+    // AI & ML
+    "AI model training",
+    "machine learning Somalia",
+    "neural networks",
+    "LLM training",
+    "natural language processing",
+    "custom AI solutions",
+    "AI chatbot Somali",
+    // Digital & Content
+    "Somali digital solutions",
+    "Somali content creator website",
+    "digital products Somalia",
+    "Somali brand design",
+    "Somali startup",
+    "Somali engineers",
+    "Somali developers community",
+    "Somali programmers",
   ],
+  authors: [{ name: "Koodby", url: "https://koodby.com" }],
+  creator: "Koodby",
+  publisher: "Koodby",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://koodby.com",
+    languages: {
+      "en-US": "https://koodby.com",
+      "so-SO": "https://koodby.com",
+    },
+  },
   openGraph: {
-    title: "Koodby — Somali technology studio",
+    title: "Koodby — Somali AI & Technology Studio",
     description:
-      "Your ideas, built together. AI models, apps, and digital solutions.",
+      "Somalia's leading technology studio. We build AI models, Somali language AI, web apps, mobile apps, and digital products. Where Somali builders connect.",
     url: "https://koodby.com",
     siteName: "Koodby",
     locale: "en_US",
+    alternateLocale: ["so_SO"],
     type: "website",
+    images: [
+      {
+        url: "/narbar-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Koodby — Somali AI & Technology Studio logo",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Koodby — Somali AI & Technology Studio",
+    description:
+      "Building AI models, Somali language AI, web & mobile apps. Somalia's leading technology studio.",
+    images: ["/narbar-logo.png"],
+  },
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -51,9 +146,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    // suppressHydrationWarning: the inline theme script adds `dark` to <html>
+    // before hydration, so the client class list intentionally differs.
+    <html
+      lang="en"
+      className={`${playfair.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <JsonLd />
+      </head>
       <body>
+        <Preloader />
         <SmoothScroll />
+        <ThemeToggle />
         <FixedClock />
         <a
           href="#content"

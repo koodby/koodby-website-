@@ -6,15 +6,18 @@ import type { Config } from "tailwindcss";
  * not the token itself.
  */
 const config: Config = {
+  darkMode: "class",
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        ink: "#0A0A0A",
-        "off-white": "#F4F2EC",
-        surface: "#FFFFFF",
-        muted: "#6B6B66",
-        hairline: "#E8E6DF",
+        // Variable-backed (RGB channels) so day/night flip in one place AND
+        // Tailwind opacity modifiers (text-ink/40, …) still work. See globals.css.
+        ink: "rgb(var(--c-ink) / <alpha-value>)",
+        "off-white": "rgb(var(--c-off-white) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
+        muted: "rgb(var(--c-muted) / <alpha-value>)",
+        hairline: "rgb(var(--c-hairline) / <alpha-value>)",
         teal: "#0F6E56",
         "teal-tint": "#E1F5EE",
         // Teal alias — points at the locked teal accent.
@@ -30,7 +33,7 @@ const config: Config = {
         demo: "0 40px 80px -32px rgba(15, 15, 20, 0.28)",
       },
       borderColor: {
-        DEFAULT: "#E8E6DF",
+        DEFAULT: "rgb(var(--c-hairline) / <alpha-value>)",
       },
       fontFamily: {
         // Display / headings — Bricolage Grotesque (next/font, self-hosted).

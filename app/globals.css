@@ -3,6 +3,44 @@
 @tailwind utilities;
 
 @layer base {
+  /* Day / night theme tokens. Flip by toggling `.dark` on <html>. */
+  /* RGB channels (space-separated) so `rgb(var(--c-ink) / <alpha>)` opacity works. */
+  :root {
+    --c-ink: 10 10 10;
+    --c-off-white: 244 242 236;
+    --c-surface: 255 255 255;
+    --c-muted: 107 107 102;
+    --c-hairline: 232 230 223;
+    --c-page: 255 255 255; /* body background */
+    --c-grid: rgba(0, 0, 0, 0.04); /* editorial gridlines */
+    --c-scrollbar: rgba(10, 10, 10, 0.28);
+    --c-scrollbar-hover: rgba(10, 10, 10, 0.5);
+    --c-selection: #e5e5e5;
+  }
+
+  .dark {
+    --c-ink: 242 240 234; /* primary text / inverse buttons */
+    --c-off-white: 18 18 20; /* page-warm surfaces / inverse pill text */
+    --c-surface: 25 25 32; /* cards, elevated panels */
+    --c-muted: 155 155 149;
+    --c-hairline: 42 42 49;
+    --c-page: 10 10 12;
+    --c-grid: rgba(255, 255, 255, 0.045);
+    --c-scrollbar: rgba(240, 240, 240, 0.24);
+    --c-scrollbar-hover: rgba(240, 240, 240, 0.44);
+    --c-selection: #2c2c33;
+  }
+
+  /* Applied by ThemeToggle for one frame while `.dark` flips. A CSS transition
+     on a property whose value comes from a custom property does NOT re-interpolate
+     when the variable changes — the old colour sticks. Killing transitions during
+     the swap makes every themed surface adopt its new value instantly. */
+  .theme-switching *,
+  .theme-switching *::before,
+  .theme-switching *::after {
+    transition: none !important;
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
@@ -29,23 +67,25 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(10, 10, 10, 0.28);
+    background: var(--c-scrollbar);
     border-radius: 999px;
     border: 3px solid transparent;
     background-clip: content-box;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(10, 10, 10, 0.5);
+    background: var(--c-scrollbar-hover);
     border: 3px solid transparent;
     background-clip: content-box;
   }
 
   body {
-    @apply bg-white text-ink font-sans antialiased;
+    @apply font-sans antialiased;
+    background-color: rgb(var(--c-page));
+    color: rgb(var(--c-ink));
     line-height: 1.6;
     text-rendering: optimizeLegibility;
     font-feature-settings: "cv11", "ss01";
-    background-image: linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-image: linear-gradient(to right, var(--c-grid) 1px, transparent 1px);
     background-size: 16.666% 100%;
   }
 
@@ -75,13 +115,13 @@
   h1,
   h2,
   h3 {
-    @apply font-sans font-black uppercase tracking-tighter text-black;
+    @apply font-sans font-black uppercase tracking-tighter text-ink;
     line-height: 0.9;
   }
 
   ::selection {
-    background: #e5e5e5;
-    color: #0a0a0a;
+    background: var(--c-selection);
+    color: var(--c-ink);
   }
 
   :focus-visible {

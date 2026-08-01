@@ -100,7 +100,7 @@ export function BrandMock() {
     <div className="grid w-[78%] max-w-[430px] grid-cols-2 gap-2.5">
       <div className="flex aspect-square items-center justify-center rounded-2xl border border-[#253422]/10 bg-[#253422] shadow-sm">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/koodby-logo.png" alt="" className="h-12 w-12 object-contain invert" />
+        <img src="/narbar-logo.png" alt="" className="h-12 w-12 object-contain invert" />
       </div>
       <div className="flex aspect-square flex-col items-center justify-center rounded-2xl border border-[#253422]/10 bg-[#FAF8F0] shadow-sm">
         <span className="font-display text-[44px] leading-none text-[#253422]">Aa</span>

@@ -33,7 +33,7 @@ const projects: Project[] = [
     name: "Gabax",
     category: "Logistics & shipping platform",
     tags: ["App Design", "Dashboard", "UX/UI"],
-    href: "#",
+    href: "https://gabax.agency/",
     img: "/work-gabax.png",
   },
   {

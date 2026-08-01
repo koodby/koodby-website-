@@ -32,11 +32,11 @@ type Service = {
 const services: Service[] = [
   {
     n: "01",
-    title: "Web Engineering",
+    title: "Web & Platform Solutions",
     description:
       "Building highly scalable, performant, and secure web applications — from complex dashboards to robust e-commerce systems.",
     tags: ["React", "Next.js", "Full-Stack", "Web Apps"],
-    features: ["Custom Web Apps", "Enterprise Solutions", "Performance Optimization", "E-commerce Platforms"],
+    features: ["Custom Web Applications", "Secure Business Portals", "High-Converting E-commerce", "Speed & SEO Optimization"],
     icon: <Monitor size={20} />,
     bgGradient: "bg-[#FAF8F0]",
     cardBg: "bg-[#FAF8F0]",
@@ -58,11 +58,11 @@ const services: Service[] = [
   },
   {
     n: "02",
-    title: "Mobile Apps",
+    title: "Mobile App Experiences",
     description:
       "Developing native-feel mobile applications that perform flawlessly across iOS and Android, focusing on clean architecture.",
     tags: ["iOS", "Android", "React Native", "Cross-Platform"],
-    features: ["iOS Applications", "Android Applications", "Mobile Architectures", "App Store Deployment"],
+    features: ["Custom iOS & Android Apps", "Seamless User Experiences", "App Launch & Maintenance", "Scalable Mobile Platforms"],
     icon: <Smartphone size={20} />,
     bgGradient: "bg-[#D6DFD5]",
     cardBg: "bg-[#253422]",
@@ -84,11 +84,11 @@ const services: Service[] = [
   },
   {
     n: "03",
-    title: "Digital Products",
+    title: "Product Strategy & Design",
     description:
       "Architecting complete digital products from the ground up — building cohesive systems that deliver real value to your users.",
     tags: ["Product", "Systems", "Brand Identity", "Scaling"],
-    features: ["Product Engineering", "System Architecture", "Visual Identity", "Scalable Growth"],
+    features: ["End-to-End Product Creation", "UI/UX & Brand Identity", "User-Centric Architecture", "Growth-Driven Systems"],
     icon: <ImageIcon size={20} />,
     bgGradient: "bg-[#1C2C1A]",
     cardBg: "bg-[#E2F1AF]",
@@ -110,11 +110,11 @@ const services: Service[] = [
   },
   {
     n: "04",
-    title: "Development",
+    title: "Cloud & System Integrations",
     description:
       "Full-stack engineering with partners — clean code, reliable infrastructure, and real shipped products.",
     tags: ["Front-End", "Back-End", "QA", "DevOps"],
-    features: ["Front-End Development", "Back-End Architecture", "API Integration", "Cloud & DevOps"],
+    features: ["Secure Cloud Infrastructure", "Seamless API Integrations", "Reliable Back-End Systems", "Automated Workflows"],
     icon: <Code size={20} />,
     bgGradient: "bg-[#0A0F14]",
     cardBg: "bg-[#111827]",
@@ -142,33 +142,21 @@ const services: Service[] = [
     tags: ["LLMs", "Machine Learning", "Neural Networks", "NLP"],
     features: ["Custom Model Training", "Data Pipelines", "RAG Integration", "Model Fine-Tuning"],
     icon: <Cpu size={20} />,
-    bgGradient: "bg-[#1E1B4B]",
-    cardBg: "bg-[#F5F3FF]",
-    textColor: "text-[#2E1065]",
-    mutedColor: "text-[#5B21B6]",
-    nColor: "text-[#2E1065]/15",
-    dotClass: "bg-[#7C3AED]",
-    btnClass: "bg-[#6D28D9] text-white hover:bg-[#5B21B6] border-none",
+    bgGradient: "bg-[#172554]",
+    cardBg: "bg-[#1E3A8A]",
+    textColor: "text-white",
+    mutedColor: "text-blue-200",
+    nColor: "text-white/10",
+    dotClass: "bg-[#60A5FA]",
+    btnClass: "bg-[#2563EB] text-white hover:bg-[#1D4ED8] border-none shadow-sm",
     visual: (
-      <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-[#1E1B4B]">
-        {/* Background Grid */}
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(#A78BFA 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-        
-        {/* Abstract Neural Network Vis */}
-        <div className="relative flex gap-6 items-center z-10">
-          <div className="flex flex-col gap-6">
-            <div className="w-4 h-4 bg-[#A78BFA] rounded-full animate-pulse" />
-            <div className="w-4 h-4 bg-[#A78BFA] rounded-full animate-pulse shadow-[0_0_15px_#A78BFA]" />
-            <div className="w-4 h-4 bg-[#A78BFA] rounded-full animate-pulse" />
-          </div>
-          <div className="flex flex-col gap-8 h-full justify-center">
-            <div className="w-16 h-[2px] bg-[#A78BFA]/40" />
-            <div className="w-16 h-[2px] bg-[#A78BFA]/40" />
-          </div>
-          <div className="w-16 h-16 border-2 border-[#A78BFA] rounded-xl flex items-center justify-center bg-black/30 backdrop-blur-sm shadow-[0_0_30px_rgba(167,139,250,0.2)]">
-            <Cpu className="text-[#A78BFA]" size={32} />
-          </div>
-        </div>
+      <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-[#0F172A]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/ai-training.png"
+          alt="AI Model Training Visual"
+          className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
+        />
       </div>
     ),
   },
