@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   description:
     "Koodby is Somalia's leading technology studio building AI models, Somali language AI, web applications, mobile apps, and digital products. We specialize in Somali AI, machine learning, and custom software development. Built in Mogadishu, made for the world.",
   icons: {
-    icon: "/narbar-logo.png",
-    shortcut: "/narbar-logo.png",
-    apple: "/narbar-logo.png",
+    icon: "/favicon-logo.png",
+    shortcut: "/favicon-logo.png",
+    apple: "/favicon-logo.png",
   },
   keywords: [
     // Brand
@@ -124,7 +124,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/narbar-logo.png",
+        url: "/favicon-logo.png",
         width: 512,
         height: 512,
         alt: "Koodby — Somali AI & Technology Studio logo",
@@ -136,7 +136,7 @@ export const metadata: Metadata = {
     title: "Koodby — Somali AI & Technology Studio",
     description:
       "Building AI models, Somali language AI, web & mobile apps. Somalia's leading technology studio.",
-    images: ["/narbar-logo.png"],
+    images: ["/favicon-logo.png"],
   },
   category: "technology",
 };
