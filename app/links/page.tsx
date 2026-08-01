@@ -4,13 +4,16 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   Briefcase,
+  Facebook,
   Github,
   Globe,
+  Lightbulb,
   Linkedin,
   Mail,
   MessageCircle,
   type LucideIcon,
 } from "lucide-react";
+import { siTiktok } from "simple-icons";
 
 import { DarkBody } from "@/components/DarkBody";
 import { FadeIn } from "@/components/anim/FadeIn";
@@ -40,34 +43,38 @@ type Row = {
   title: string;
   subtitle: string;
   href: string;
-  icon: LucideIcon;
+  icon: any;
   /** Icon-tile background; defaults to white with ink icon. */
   tint?: string;
   /** Icon color; defaults to ink on the white tile. */
   iconColor?: string;
 };
 
-const resources: Row[] = [
-  {
-    title: "About us",
-    subtitle: "koodby.com",
-    href: "/",
-    icon: Globe,
-  },
-  {
-    title: "Hire us",
-    subtitle: "Start your project — let's talk",
-    href: mailtoLink,
-    icon: Briefcase,
-  },
-];
+function TiktokIcon({ size, ...props }: any) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d={siTiktok.path} />
+    </svg>
+  );
+}
+
 
 const community: Row[] = [
   {
-    title: "GitHub",
-    subtitle: "@koodby",
-    href: site.github,
-    icon: Github,
+    title: "Insights",
+    subtitle: "Read our latest researches",
+    href: "/researches",
+    icon: Lightbulb,
+    tint: "#1A1A1A",
+    iconColor: "#FFFFFF",
+  },
+  {
+    title: "Facebook",
+    subtitle: "Koodby",
+    href: "https://www.facebook.com/profile.php?id=61592602497132",
+    icon: Facebook,
+    tint: "#1877F2",
+    iconColor: "#FFFFFF",
   },
   {
     title: "WhatsApp",
@@ -78,11 +85,11 @@ const community: Row[] = [
     iconColor: "#FFFFFF",
   },
   {
-    title: "LinkedIn",
-    subtitle: "Koodby",
-    href: site.linkedin,
-    icon: Linkedin,
-    tint: "#0A66C2",
+    title: "TikTok",
+    subtitle: "@koodby1",
+    href: "https://www.tiktok.com/@koodby1?is_from_webapp=1&sender_device=pc",
+    icon: TiktokIcon,
+    tint: "#000000",
     iconColor: "#FFFFFF",
   },
   {
@@ -160,19 +167,8 @@ export default function LinksPage() {
           </Link>
         </FadeIn>
 
-        {/* heading */}
-        <FadeIn delay={0.08} y={16}>
-          <h1 className="mt-10 max-w-[16ch] text-[32px] font-medium normal-case leading-[1.15] tracking-tight text-white sm:text-[40px]">
-            Discover our resources, stay informed, and connect with us.
-          </h1>
-        </FadeIn>
 
-        {/* resources */}
-        <section className="mt-12">
-          {resources.map((row, i) => (
-            <LinkRow key={row.title} row={row} delay={0.14 + i * 0.06} />
-          ))}
-        </section>
+
 
         {/* community */}
         <section className="mt-16">

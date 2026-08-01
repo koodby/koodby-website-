@@ -10,8 +10,8 @@ export const site = {
   emailDirect: "tarzan@koodby.com",
   whatsappNumber: "",
   whatsappGreeting: "Hello Koodby, I would like to discuss a project.",
-  github: "https://github.com/koodby",
-  linkedin: "https://www.linkedin.com/company/koodby",
+  facebook: "https://www.facebook.com/profile.php?id=61592602497132",
+  tiktok: "https://www.tiktok.com/@koodby1?is_from_webapp=1&sender_device=pc",
 } as const;
 
 export const mailtoLink = `mailto:${site.email}`;

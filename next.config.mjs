@@ -1,3 +1,12 @@
+let supabaseHostname = "mkzgtbggzftegzflxwjn.supabase.co";
+try {
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    supabaseHostname = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname;
+  }
+} catch (e) {
+  // Ignore URL parsing errors and fallback
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -6,7 +15,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "mkzgtbggzftegzflxwjn.supabase.co",
+        hostname: supabaseHostname,
         pathname: "/storage/v1/object/public/**",
       },
     ],

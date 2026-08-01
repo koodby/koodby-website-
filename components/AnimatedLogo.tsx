@@ -19,7 +19,7 @@ export function AnimatedLogo() {
   return (
     <motion.div
       layout
-      className="relative flex items-center justify-center overflow-hidden rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md border border-white/50 dark:border-white/20 shadow-sm"
+      className="relative flex items-center justify-center overflow-hidden rounded-full bg-white border border-gray-200 shadow-sm"
       initial={{ width: 44, height: 44 }}
       animate={{ width: isText ? 134 : 44, height: 44 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -39,7 +39,7 @@ export function AnimatedLogo() {
         ) : (
           <motion.span
             key="text"
-            className="absolute flex font-sans text-[24px] font-black tracking-tight text-ink -translate-x-1"
+            className="absolute flex font-sans text-[24px] font-black tracking-tight text-[#0a0a0a] -translate-x-1"
             initial="hidden"
             animate="visible"
             exit="exit"

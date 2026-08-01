@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { AnimatedLogo } from "./AnimatedLogo";
 
 const links = [
   { href: "#services", label: "Services" },
@@ -36,11 +37,7 @@ export function Nav({ logo }: { logo?: ReactNode }) {
         {/* Left side: Logo */}
         <div className="flex-1 flex justify-start">
           <a href="/" className="flex items-center" aria-label="Koodby — Home">
-            {logo ?? (
-              <div className="bg-white/40 dark:bg-white/10 backdrop-blur-md border border-white/50 dark:border-white/20 text-ink px-5 py-2 rounded-full flex items-center justify-center shadow-sm">
-                <span className="text-[24px] font-black tracking-tight leading-none pt-0.5 -translate-x-1">koodby</span>
-              </div>
-            )}
+            {logo ?? <AnimatedLogo />}
           </a>
         </div>
 

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, ArrowUp, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { ArrowUpRight, ArrowUp, Facebook, Mail, MessageCircle } from "lucide-react";
+import { siTiktok } from "simple-icons";
 import { FadeIn } from "./anim/FadeIn";
 import { Magnet } from "./anim/Magnet";
 import { site, whatsappLink, mailtoLink } from "@/lib/site";
@@ -42,9 +43,17 @@ const sitemap = [
   { label: "FAQ", href: "#faq" },
 ];
 
+function TiktokIcon({ size, ...props }: any) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d={siTiktok.path} />
+    </svg>
+  );
+}
+
 const elsewhere = [
-  { label: "GitHub", href: site.github, icon: Github },
-  { label: "LinkedIn", href: site.linkedin, icon: Linkedin },
+  { label: "Facebook", href: site.facebook, icon: Facebook },
+  { label: "TikTok", href: site.tiktok, icon: TiktokIcon },
   { label: "Email", href: mailtoLink, icon: Mail },
 ];
 
