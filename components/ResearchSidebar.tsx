@@ -2,11 +2,25 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Linkedin, Copy, Check, GraduationCap, Code } from "lucide-react";
+import { Facebook, Copy, Check, GraduationCap, Code } from "lucide-react";
+import { siTiktok } from "simple-icons";
 import { useState } from "react";
 
 import { type ResearchPost } from "@/lib/research-data";
 import { site } from "@/lib/site";
+
+function TiktokIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      fill="currentColor"
+      className={className}
+    >
+      <path d={siTiktok.path} />
+    </svg>
+  );
+}
 
 function XIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
@@ -66,13 +80,13 @@ export function ResearchSidebar({
         {/* Follow button */}
         <div className="mt-5">
           <a
-            href={site.linkedin}
+            href={site.tiktok}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#1d9bf0] text-white hover:bg-[#1a8cd8] px-5 py-2.5 text-[14.5px] font-bold transition-opacity hover:opacity-90 shadow-sm cursor-pointer"
+            className="inline-flex items-center justify-center gap-2.5 rounded-full bg-ink text-white hover:bg-ink/80 px-5 py-2.5 text-[14.5px] font-bold transition-opacity hover:opacity-90 shadow-sm cursor-pointer"
           >
-            <XIcon className="h-4 w-4" />
-            <span>Follow on X</span>
+            <TiktokIcon className="h-4 w-4" />
+            <span>Follow on TikTok</span>
           </a>
         </div>
 
@@ -171,13 +185,13 @@ export function ResearchSidebar({
               <XIcon className="h-4.5 w-4.5" />
             </a>
             <a
-              href={site.linkedin}
+              href={site.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Share on LinkedIn"
+              aria-label="Visit Facebook"
               className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-off-white transition-opacity hover:opacity-90 shadow-xs"
             >
-              <Linkedin size={17} aria-hidden />
+              <Facebook size={17} aria-hidden />
             </a>
             <button
               onClick={handleCopyLink}
