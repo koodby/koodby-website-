@@ -1,6 +1,8 @@
 "use client";
 
-import { useRef, type MouseEvent } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { createPortal } from "react-dom";
 import { FadeIn } from "./anim/FadeIn";
 import { WordReveal } from "./anim/WordReveal";
 
@@ -43,8 +45,68 @@ const clampFocus = (member?: TeamMember) =>
 
 export function TeamCoverflow() {
   const tiltRef = useRef<HTMLAnchorElement | null>(null);
+  const cursorRef = useRef<HTMLDivElement | null>(null);
+  const posRef = useRef({ x: 0, y: 0 });
 
-  const onMove = (e: MouseEvent<HTMLAnchorElement>) => {
+  const [mounted, setMounted] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const syncCursorPosition = (x: number, y: number) => {
+    posRef.current = { x, y };
+    if (cursorRef.current) {
+      cursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    }
+  };
+
+  const resetTilt = () => {
+    const el = tiltRef.current;
+    if (!el) return;
+    el.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+  };
+
+  useEffect(() => {
+    if (!isHovering) return;
+
+    const reset = () => {
+      setIsHovering(false);
+      setIsPressed(false);
+      resetTilt();
+    };
+
+    const handleScroll = () => {
+      const el = tiltRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const { x, y } = posRef.current;
+      if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+        reset();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("blur", reset);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("blur", reset);
+    };
+  }, [isHovering]);
+
+  const onPointerEnter = (e: PointerEvent<HTMLAnchorElement>) => {
+    if (e.pointerType !== "mouse") return;
+    syncCursorPosition(e.clientX, e.clientY);
+    setIsHovering(true);
+  };
+
+  const onPointerMove = (e: PointerEvent<HTMLAnchorElement>) => {
+    if (e.pointerType === "mouse") {
+      syncCursorPosition(e.clientX, e.clientY);
+      if (!isHovering) setIsHovering(true);
+    }
     const el = tiltRef.current;
     if (!el) return;
     const { width, height, top, left } = el.getBoundingClientRect();
@@ -54,10 +116,18 @@ export function TeamCoverflow() {
     el.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(${TILT.scale}, ${TILT.scale}, ${TILT.scale})`;
   };
 
-  const onLeave = () => {
-    const el = tiltRef.current;
-    if (!el) return;
-    el.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+  const onPointerLeave = () => {
+    setIsHovering(false);
+    setIsPressed(false);
+    resetTilt();
+  };
+
+  const onPointerDown = (e: PointerEvent<HTMLAnchorElement>) => {
+    if (e.pointerType === "mouse") setIsPressed(true);
+  };
+
+  const onPointerUp = () => {
+    setIsPressed(false);
   };
 
   return (
@@ -106,8 +176,12 @@ export function TeamCoverflow() {
               href={FOUNDER.href}
               target="_blank"
               rel="noopener noreferrer"
-              onMouseMove={onMove}
-              onMouseLeave={onLeave}
+              onPointerEnter={onPointerEnter}
+              onPointerMove={onPointerMove}
+              onPointerLeave={onPointerLeave}
+              onPointerDown={onPointerDown}
+              onPointerUp={onPointerUp}
+              onPointerCancel={onPointerLeave}
               aria-label={`${FOUNDER.name} — visit ${FOUNDER.href}`}
               className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4"
               style={{
@@ -118,7 +192,7 @@ export function TeamCoverflow() {
                 transformStyle: "preserve-3d",
                 transition: "transform 0.2s ease-out",
                 willChange: "transform",
-                cursor: "pointer",
+                cursor: isHovering ? "none" : "pointer",
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -167,6 +241,105 @@ export function TeamCoverflow() {
           </div>
         </div>
       </FadeIn>
+
+      {/* custom hover cursor for founder image */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {isHovering && (
+              <motion.div
+                key="founder-cursor"
+                aria-hidden="true"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.14 }}
+                style={{
+                  position: "fixed",
+                  inset: 0,
+                  zIndex: 9999,
+                  pointerEvents: "none",
+                }}
+              >
+                <div
+                  ref={cursorRef}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    willChange: "transform",
+                    transform: `translate3d(${posRef.current.x}px, ${posRef.current.y}px, 0)`,
+                  }}
+                >
+                  <motion.div
+                    initial={{ scale: 0.65 }}
+                    animate={{ scale: isPressed ? 0.9 : 1 }}
+                    exit={{ scale: 0.65 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 520,
+                      damping: 32,
+                      mass: 0.6,
+                    }}
+                    style={{
+                      position: "relative",
+                      transformOrigin: "0 0",
+                    }}
+                  >
+                    {/* Pointer arrow */}
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      style={{
+                        position: "absolute",
+                        top: -2,
+                        left: -2,
+                        display: "block",
+                        filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28))",
+                      }}
+                    >
+                      <path
+                        d="M3.5 2.5L20.5 10.2C21.25 10.55 21.15 11.68 20.32 11.9L13.2 13.75L10.35 20.3C9.98 21.12 8.82 20.98 8.62 20.12L3.5 2.5Z"
+                        fill="#F59E0B"
+                        stroke="#B45309"
+                        strokeOpacity="0.3"
+                        strokeWidth="0.9"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+
+                    {/* "Click" pill */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 10,
+                        left: 11,
+                        transform: "rotate(-5deg)",
+                        backgroundColor: "#F59E0B",
+                        color: "#FFFFFF",
+                        fontSize: 13,
+                        fontWeight: 700,
+                        lineHeight: 1,
+                        letterSpacing: "-0.01em",
+                        padding: "7px 14px",
+                        borderRadius: 9999,
+                        whiteSpace: "nowrap",
+                        boxShadow:
+                          "0 6px 16px rgba(245, 158, 11, 0.35), 0 2px 6px rgba(0, 0, 0, 0.18)",
+                        userSelect: "none",
+                      }}
+                    >
+                      Click
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </section>
   );
 }
