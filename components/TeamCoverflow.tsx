@@ -1,13 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
-import {
-  useMemo,
-  useRef,
-  useState,
-  type CSSProperties,
-  type MouseEvent,
-} from "react";
+import { useRef, type MouseEvent } from "react";
 import { FadeIn } from "./anim/FadeIn";
 import { WordReveal } from "./anim/WordReveal";
 
@@ -17,34 +10,21 @@ interface TeamMember {
   image: string;
   name: string;
   role: string;
+  href: string;
   focusY?: number;
 }
 
-const TEAM: TeamMember[] = [
-  {
-    image: "/tarzan_founder.png",
-    name: "Tarzan Abdirizak",
-    role: "Founder & Software and AI Engineer",
-    focusY: 50,
-  },
-  {
-    image: "/cofounder_marketer.png",
-    name: "Co-Founder",
-    role: "Co-Founder & Marketer",
-    focusY: 50,
-  },
-];
-
-/* ─── flip config ───────────────────────────────────────────────── */
-
-const HALF_TURN = 180;
-const PERSPECTIVE = 900;
-
-const FLIP_TRANSITION = {
-  type: "tween" as const,
-  duration: 0.6,
-  ease: "easeInOut" as const,
+const FOUNDER: TeamMember = {
+  image: "/tarzan_founder.png",
+  name: "Tarzan Abdirizak",
+  role: "Founder & Software and AI Engineer",
+  href: "https://cfo.koodby.com/",
+  focusY: 50,
 };
+
+/* ─── card config ───────────────────────────────────────────────── */
+
+const PERSPECTIVE = 900;
 
 const TILT = {
   effect: "repel" as const,
@@ -62,38 +42,9 @@ const clampFocus = (member?: TeamMember) =>
 /* ─── component ─────────────────────────────────────────────────── */
 
 export function TeamCoverflow() {
-  const list = TEAM;
-  const urls = useMemo(() => list.map((m) => m.image), [list]);
+  const tiltRef = useRef<HTMLAnchorElement | null>(null);
 
-  const tiltRef = useRef<HTMLDivElement | null>(null);
-
-  const [angle, setAngle] = useState(0);
-  const [index, setIndex] = useState(0);
-  const [faces, setFaces] = useState({ a: 0, b: 0 });
-
-  const facing = (deg: number) =>
-    Math.abs(Math.round(deg / HALF_TURN)) % 2 === 0 ? "a" : "b";
-
-  const flip = (dir: 1 | -1) => {
-    const n = urls.length;
-    if (n < 2) return;
-
-    const next = (index + dir + n) % n;
-    const nextAngle = angle + dir * HALF_TURN;
-    const incoming = facing(nextAngle);
-
-    setFaces((f) => ({ ...f, [incoming]: next }));
-    setIndex(next);
-    setAngle(nextAngle);
-  };
-
-  const onClick = (e: MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const isLeft = e.clientX - rect.left < rect.width / 2;
-    flip(isLeft ? -1 : 1);
-  };
-
-  const onMove = (e: MouseEvent<HTMLDivElement>) => {
+  const onMove = (e: MouseEvent<HTMLAnchorElement>) => {
     const el = tiltRef.current;
     if (!el) return;
     const { width, height, top, left } = el.getBoundingClientRect();
@@ -108,20 +59,6 @@ export function TeamCoverflow() {
     if (!el) return;
     el.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
   };
-
-  const faceStyle = (slot: number): CSSProperties => ({
-    position: "absolute",
-    inset: 0,
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    objectPosition: `center ${clampFocus(list[slot % list.length])}%`,
-    borderRadius: CARD_RADIUS,
-    backfaceVisibility: "hidden",
-    WebkitBackfaceVisibility: "hidden",
-    userSelect: "none",
-    pointerEvents: "none",
-  });
 
   return (
     <section
@@ -150,7 +87,7 @@ export function TeamCoverflow() {
         </div>
       </div>
 
-      {/* flip gallery */}
+      {/* founder card */}
       <FadeIn delay={0.15}>
         <div className="flex flex-col items-center justify-center gap-6">
           <div
@@ -162,97 +99,72 @@ export function TeamCoverflow() {
               alignItems: "center",
               justifyContent: "center",
               perspective: `${PERSPECTIVE}px`,
-              cursor: urls.length > 1 ? "pointer" : "default",
             }}
           >
-            <div
+            <a
               ref={tiltRef}
+              href={FOUNDER.href}
+              target="_blank"
+              rel="noopener noreferrer"
               onMouseMove={onMove}
               onMouseLeave={onLeave}
-              onClick={onClick}
-              role="button"
-              tabIndex={0}
-              aria-label={`Team member ${list[index]?.name} — click to flip`}
-              onKeyDown={(e) => {
-                if (e.key === "ArrowLeft") flip(-1);
-                if (e.key === "ArrowRight" || e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  flip(1);
-                }
-              }}
+              aria-label={`${FOUNDER.name} — visit ${FOUNDER.href}`}
+              className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4"
               style={{
                 position: "relative",
                 width: "100%",
                 height: "100%",
+                borderRadius: CARD_RADIUS,
                 transformStyle: "preserve-3d",
                 transition: "transform 0.2s ease-out",
                 willChange: "transform",
+                cursor: "pointer",
               }}
             >
-              <motion.div
-                animate={{ rotateY: angle }}
-                transition={FLIP_TRANSITION}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={FOUNDER.image}
+                alt={FOUNDER.name}
+                draggable={false}
                 style={{
-                  position: "relative",
+                  position: "absolute",
+                  inset: 0,
                   width: "100%",
                   height: "100%",
-                  transformStyle: "preserve-3d",
+                  objectFit: "cover",
+                  objectPosition: `center ${clampFocus(FOUNDER)}%`,
+                  borderRadius: CARD_RADIUS,
+                  userSelect: "none",
+                  pointerEvents: "none",
                 }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={urls[faces.a % urls.length]}
-                  alt={list[faces.a % list.length]?.name ?? ""}
-                  draggable={false}
-                  style={faceStyle(faces.a)}
-                />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={urls[faces.b % urls.length]}
-                  alt={list[faces.b % list.length]?.name ?? ""}
-                  draggable={false}
-                  style={{
-                    ...faceStyle(faces.b),
-                    transform: "rotateY(180deg)",
-                  }}
-                />
-              </motion.div>
-            </div>
+              />
+            </a>
           </div>
 
           {/* Name + role label */}
-          <AnimatePresence mode="popLayout" initial={false}>
-            <motion.div
-              key={`label-${index}`}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              style={{ textAlign: "center", maxWidth: "100%" }}
+          <div style={{ textAlign: "center", maxWidth: "100%" }}>
+            <span
+              className="font-display text-ink block"
+              style={{
+                fontSize: 26,
+                fontWeight: 700,
+                lineHeight: "1.2em",
+                letterSpacing: "-0.02em",
+              }}
             >
-              <span
-                className="font-display text-ink block"
-                style={{
-                  fontSize: 26,
-                  fontWeight: 700,
-                  lineHeight: "1.2em",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {list[index]?.name ?? ""}
-              </span>
-              <span
-                className="text-muted block mt-1"
-                style={{
-                  fontSize: 15,
-                  fontWeight: 500,
-                  letterSpacing: "0.02em",
-                }}
-              >
-                {list[index]?.role ?? ""}
-              </span>
-            </motion.div>
-          </AnimatePresence>
+              {FOUNDER.name}
+            </span>
+            <span
+              className="text-muted block mt-1"
+              style={{
+                fontSize: 15,
+                fontWeight: 500,
+                letterSpacing: "0.02em",
+              }}
+            >
+              {FOUNDER.role}
+            </span>
+          </div>
         </div>
       </FadeIn>
     </section>
